@@ -21,7 +21,7 @@ Row {data-width=500}
 -----------------------------------------------------------------------
 
 ### Introduction
-Problem 2 is different from Problem 1. Thus, I put the problem 2 in a different repo. 
+Problem 2 is different from Problem 1. Thus, I put the problem 2 in a different repo. the repo can be found on [github](https://github.com/biorabbit/p8105_hw4_zj2357)
 
 In this part, we choose to make a flexdashboard to show the comprehensive analysis of `t_max` and `t_min` in `ny_noaa` dataset. It contains
 
