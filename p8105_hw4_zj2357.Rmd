@@ -35,6 +35,10 @@ noaa_ave =
     tmax = as.numeric(tmax),
     tmin = as.numeric(tmin)
   ) %>%
+  filter(
+    tmax < 550,
+    tmin < 500
+  ) %>%
   group_by(date) %>%
   summarise(
     ave_tmax = mean(tmax, na.rm =TRUE)/10,
@@ -42,6 +46,8 @@ noaa_ave =
     ave_prcp = mean(prcp, na.rm =TRUE)/10
   ) %>%
   mutate(
+    ave_tmax = round(ave_tmax, 2),
+    ave_tmin = round(ave_tmin, 2),
     text_lab = str_c("Precipitation(mm): ", round(ave_prcp,2))
   )
 
@@ -93,7 +99,7 @@ noaa_line =
   ggplot(aes(x = date, y = temp, color = extreme)) +
   geom_line(alpha = 0.3)
 
-ggplotly(noaa_line, text = ~text_lab)
+ggplotly(noaa_line)
 ```
 
 
