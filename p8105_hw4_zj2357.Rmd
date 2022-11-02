@@ -42,7 +42,7 @@ noaa_ave =
     ave_prcp = mean(prcp, na.rm =TRUE)/10
   ) %>%
   mutate(
-    text_lab = str_c("Precipitation(mm): ", ave_prcp)
+    text_lab = str_c("Precipitation(mm): ", round(ave_prcp,2))
   )
 
 noaa_ave %>%
@@ -53,8 +53,7 @@ noaa_ave %>%
     mode = "markers",
     color = ~ave_prcp,
     text = ~text_lab,
-    alpha = 0.3
-    
+    alpha = 0.1
   )
   
 ```
@@ -65,7 +64,18 @@ Column {data-width=500}
 ### The Distribution of Temperature Extremes
 
 ```{r}
+noaa_hist =
+  noaa_ave %>%
+  pivot_longer(
+    ave_tmin:ave_tmax,
+    names_to = "extreme",
+    names_prefix = "ave_",
+    values_to = "temp"
+  ) %>%
+  ggplot(aes(x = temp, fill = extreme)) +
+  geom_histogram()
 
+ggplotly(noaa_hist)
 ```
 
 ### Change of Temperature Averaged over station
