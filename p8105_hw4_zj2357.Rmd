@@ -1,0 +1,78 @@
+---
+title: "p8105_hw4_zj2357"
+author: "Zekai Jin"
+date: "2022-11-01"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+
+```{r init, message=FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+library(flexdashboard)
+data("ny_noaa")
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Introduction
+Problem 2 is different from Problem 1. Thus, I put the problem 2 in a different repo. 
+
+In this part, we choose to make a flexdashboard to show the comprehensive analysis of `t_max` and `t_min` in `ny_noaa` dataset.
+
+
+### The Relationship between maximum and minimum temperature averaged over station
+
+```{r}
+noaa_ave =
+  ny_noaa %>%
+  mutate(
+    tmax = as.numeric(tmax),
+    tmin = as.numeric(tmin)
+  ) %>%
+  group_by(date) %>%
+  summarise(
+    ave_tmax = mean(tmax, na.rm =TRUE)/10,
+    ave_tmin = mean(tmin, na.rm =TRUE)/10,
+    ave_prcp = mean(prcp, na.rm =TRUE)/10
+  ) %>%
+  mutate(
+    text_lab = str_c("Precipitation(mm): ", ave_prcp)
+  )
+
+noaa_ave %>%
+  plot_ly(
+    x = ~ave_tmin,
+    y = ~ave_tmax,
+    type = "scatter",
+    mode = "markers",
+    color = ~ave_prcp,
+    text = ~text_lab,
+    alpha = 0.3
+    
+  )
+  
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### The Distribution of Temperature Extremes
+
+```{r}
+
+```
+
+### Change of Temperature Averaged over station
+
+```{r}
+
+```
+
+
+
