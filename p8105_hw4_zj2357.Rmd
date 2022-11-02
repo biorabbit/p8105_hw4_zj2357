@@ -23,10 +23,16 @@ Row {data-width=500}
 ### Introduction
 Problem 2 is different from Problem 1. Thus, I put the problem 2 in a different repo. 
 
-In this part, we choose to make a flexdashboard to show the comprehensive analysis of `t_max` and `t_min` in `ny_noaa` dataset.
+In this part, we choose to make a flexdashboard to show the comprehensive analysis of `t_max` and `t_min` in `ny_noaa` dataset. It contains
+
+* a scatter plot
+
+* a histogram
+
+* a line plot
 
 
-### The Relationship between maximum and minimum temperature averaged over station
+### The Relationship between Maximum and Minimum Temperature
 
 ```{r}
 noaa_ave =
@@ -77,7 +83,8 @@ noaa_hist =
     values_to = "temp"
   ) %>%
   ggplot(aes(x = temp, fill = extreme)) +
-  geom_histogram(alpha = 0.7)
+  geom_histogram(alpha = 0.7) +
+  xlab("temperature (C)")
 
 ggplotly(noaa_hist)
 ```
@@ -85,7 +92,7 @@ Row {data-width=500}
 -----------------------------------------------------------------------
 
 
-### Change of Temperature Averaged over station
+### Change of Temperature Averaged over Station
 
 ```{r}
 noaa_line =
@@ -97,7 +104,9 @@ noaa_line =
     values_to = "temp"
   ) %>%
   ggplot(aes(x = date, y = temp, color = extreme)) +
-  geom_line(alpha = 0.3)
+  geom_line(alpha = 0.3) +
+  ylab("temperature (C)") +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y")
 
 ggplotly(noaa_line)
 ```
