@@ -4,7 +4,7 @@ author: "Zekai Jin"
 date: "2022-11-01"
 output: 
   flexdashboard::flex_dashboard:
-    orientation: columns
+    orientation: rows
     vertical_layout: fill
 ---
 
@@ -17,7 +17,7 @@ library(flexdashboard)
 data("ny_noaa")
 ```
 
-Column {data-width=500}
+Row {data-width=500}
 -----------------------------------------------------------------------
 
 ### Introduction
@@ -58,8 +58,6 @@ noaa_ave %>%
   
 ```
 
-Column {data-width=500}
------------------------------------------------------------------------
 
 ### The Distribution of Temperature Extremes
 
@@ -73,10 +71,13 @@ noaa_hist =
     values_to = "temp"
   ) %>%
   ggplot(aes(x = temp, fill = extreme)) +
-  geom_histogram(alpha = 0.5)
+  geom_histogram(alpha = 0.7)
 
 ggplotly(noaa_hist)
 ```
+Row {data-width=500}
+-----------------------------------------------------------------------
+
 
 ### Change of Temperature Averaged over station
 
