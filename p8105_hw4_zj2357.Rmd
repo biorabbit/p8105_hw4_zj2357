@@ -73,7 +73,7 @@ noaa_hist =
     values_to = "temp"
   ) %>%
   ggplot(aes(x = temp, fill = extreme)) +
-  geom_histogram()
+  geom_histogram(alpha = 0.5)
 
 ggplotly(noaa_hist)
 ```
@@ -81,7 +81,18 @@ ggplotly(noaa_hist)
 ### Change of Temperature Averaged over station
 
 ```{r}
+noaa_line =
+  noaa_ave %>%
+  pivot_longer(
+    ave_tmin:ave_tmax,
+    names_to = "extreme",
+    names_prefix = "ave_",
+    values_to = "temp"
+  ) %>%
+  ggplot(aes(x = date, y = temp, color = extreme)) +
+  geom_line(alpha = 0.3)
 
+ggplotly(noaa_line, text = ~text_lab)
 ```
 
 
